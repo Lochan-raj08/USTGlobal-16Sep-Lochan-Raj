@@ -1,0 +1,4 @@
+15,Kunal,10000,M
+16,Manohar,50000,M
+17,Mumtaz,25000,F
+18,Lakshmi,10000,F
