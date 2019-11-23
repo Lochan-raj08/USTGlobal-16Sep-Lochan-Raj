@@ -1,19 +1,19 @@
-package com.ustglobal.onetoone;
+package com.ustglobal.onetomany;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
 @Data
-@Table(name="person")
-public class Person {
+@Entity
+@Table(name="pencil")
+public class Pencil {
 	
 	@Id
 	@Column
@@ -22,11 +22,8 @@ public class Person {
 	@Column
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="vid")
-	private VoterCard voterCard;
-	
-
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="bid",nullable = false)
+	private PencilBox pencilBox;
 
 }
