@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -17,7 +18,7 @@ import net.bytebuddy.build.ToStringPlugin.Exclude;
 public class User {
 	
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column
 	private String name;
@@ -26,6 +27,8 @@ public class User {
 	private String email;
 	@Column
 	private String password;
+	@Column
+	private int status;
 	public int getId() {
 		return id;
 	}
@@ -49,6 +52,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

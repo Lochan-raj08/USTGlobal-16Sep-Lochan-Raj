@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import net.bytebuddy.build.ToStringPlugin.Exclude;
 @Table(name="product")
 public class Product {
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pid;
 	@Column
 	private int price;

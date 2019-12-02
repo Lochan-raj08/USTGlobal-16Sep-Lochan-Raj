@@ -27,7 +27,7 @@
 <td><%=product.getPid() %></td>
 <td><%=product.getPname() %></td>
 <td><%=product.getPrice() %></td>
-<td><a href="./buy">buy</a></td>
+<td><a href="./buy?pname=<%=product.getPname()%>">buy</a></td>
 </tr>
 </table>
 

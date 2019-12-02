@@ -11,8 +11,6 @@
 <%User user=(User)session.getAttribute("user"); %>
 
 <form action="./changepassword" method="post" style="margin-left: 450px;margin-top: 100px;">
-ID:
-<br><input type="text" name="id" value="<%=user.getId()%>"><br>
 Password:<br>
 <input type="text" name="password">
 <button type="submit">change</button>

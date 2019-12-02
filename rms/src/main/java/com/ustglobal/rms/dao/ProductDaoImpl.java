@@ -24,13 +24,24 @@ public class ProductDaoImpl implements ProductDAO{
 		EntityManager manager=factory.createEntityManager();
 		EntityTransaction transaction=manager.getTransaction();
 		transaction.begin();
-		String jpql="from User where email=:email and password=:password";
+		String jpql="from User where email=:email";
 		TypedQuery<User> tquery=manager.createQuery(jpql, User.class);
 		tquery.setParameter("email", email);
-		tquery.setParameter("password", password);
+		
 		try {
 			User user=tquery.getSingleResult();
-			return user;
+			if(user.getPassword().equals(password)) {
+				return user;
+			}else if (user.getStatus()<3) {
+				String update="update User set status=:status";
+				tquery=manager.createQuery(update, User.class);
+				int i=user.getStatus()+1;
+				tquery.setParameter("status", i);
+				return null;
+			}else{
+				return null;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -90,6 +101,7 @@ public class ProductDaoImpl implements ProductDAO{
 		try {
 			String jpql="from OrderProduct where email=:email";
 			TypedQuery<OrderProduct> tquery=manager.createQuery(jpql,OrderProduct.class);
+			tquery.setParameter("email", email);
 			List<OrderProduct> list=tquery.getResultList();
 			return list;
 		}catch (Exception e) {

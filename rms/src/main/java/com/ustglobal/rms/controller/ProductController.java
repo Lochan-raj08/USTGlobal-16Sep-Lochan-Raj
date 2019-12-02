@@ -1,5 +1,8 @@
 package com.ustglobal.rms.controller;
 
+import java.util.List;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.ustglobal.rms.bean.OrderProduct;
 import com.ustglobal.rms.bean.Product;
 import com.ustglobal.rms.bean.User;
 import com.ustglobal.rms.service.ProductService;
@@ -50,6 +55,7 @@ public class ProductController {
 		if(check) {
 			map.addAttribute("msg", "Your Registered");
 		}else {
+			
 			map.addAttribute("msg", "Email is Repeated");
 		}
 		return "login";
@@ -97,23 +103,56 @@ public class ProductController {
 		}
 	}
 	@GetMapping("/buy")
-	public String buy(@SessionAttribute(name= "user", required = false) User user,ModelMap map,Product product) {
+	public String buy(@SessionAttribute(name= "user", required = false) User user,ModelMap map,String pname) {
 		if(user!=null) {
-			map.addAttribute("buy", product);
-			return "buyproduct";
+			Product product=service.search(pname);
+			map.addAttribute("myproduct", product);
+			return "buyproduct";			
 		}else {
 			map.addAttribute("msg", "First Login");
 			return "login";
 		}
 	}
-	@PostMapping("/buy")
-	public String buyproduct(@SessionAttribute(name= "user", required = false) User user,ModelMap map,Product product, int quantity) {
+	@GetMapping("/buyproduct")
+	public String buyproduct(@SessionAttribute(name= "user", required = false) User user,String pname,ModelMap map,int quantity) {
 		if(user!=null) {
+			Product product=service.search(pname);
+			
 			service.buyProduct(user, product, quantity);
 			map.addAttribute("msg", "product added");
 			return "home";
 		}else {
 			map.addAttribute("msg", "First Login");
+			return "login";
+		}
+	}
+	@GetMapping("/order")
+	public String order(@SessionAttribute(name= "user", required = false) User user,ModelMap map) {
+		if(user!=null) {
+			List<OrderProduct> list=service.getProducts(user.getEmail());
+			if(list.isEmpty()) {
+				map.addAttribute("msg", "No Product You Have");
+				return "home";
+			}else {
+				map.addAttribute("orders", list);
+				return "orders";
+			}
+		}else {
+			map.addAttribute("msg", "First Login");
+			return "login";
+		}
+	
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "login";
+	}
+	@GetMapping("/home")
+	public String home(@SessionAttribute(name= "user", required = false) User user,ModelMap map) {
+		if(user!=null) {
+			return "home";
+		}else {
 			return "login";
 		}
 	}
