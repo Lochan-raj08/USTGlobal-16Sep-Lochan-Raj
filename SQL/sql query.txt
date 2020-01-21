@@ -1,0 +1,160 @@
+  select * from employee where deptno !=20/query to display not equal to
+select * from employee where salary >30000;/to display gretaer condition
+select * from employee where age <30;/query to perform lesser than condition
+select age,ename,salary,mobileno,email from employee  where age>=28;/greater than or equals to
+
+
+Day-3
+
+select salary+5000 from employee where eid=4;/to change one record
+select * from employee where deptno=100 and salary>=30000;/and operator
+
+*write a query to display name salary who is working in deptno 10 and 20?
+
+*write a query to display job designation as tester and age=25?
+select * from employee where age=23 and designation='tester';
+
+*write a query to dispaly all the record of the employee who is working as a tester or having salary more than 40000?
+ select * from employee where designation='tester' or salary>30000;
+
+*query to display name salary age from employee table who is workin in deptno 10 40 or 50?
+select * from employee where deptno=10 or deptno=40 or deptno=50;
+
+*wite a query to dispaly employee detail whose age is more than 25 and blood group is b+?
+ select * from employee where age>20 and bloodgroup='b positive';
+
+*write a query excluding tester?
+select * from employee where not designation='tester';
+select * from employee where  designation!='tester';
+select * from employee where  designation<>'tester';
+
+*write a query to display name of all the employee who is workin has hr or tester and salary>40000?
+select * from employee where designation='tester' or designation='hr' and salary=30000;
+
+*write a query to display all the employee excluding software developer who are working in deptno=40?
+ select * from employee where not designation='jfs developer' and 
+order of execution:- not,and ,or,where,from,select
+
+*write a query to dispaly all the jfs developer who are working for deptno=10,40;
+select * from employee where designation='jfs developer' and deptno=10 or deptno=40;
+
+*write a query to display all details to employee working in deptno 40,50,60?
+ select * from employee where designation IN(40,50,60);
+
+*write a query to display name of all the employee who is working as tester and techsupport and developer?
+ select * from employee where designation IN('tech support','tester','jfs developer');
+
+*write a query to display the detal as tester,admin software developer who are workin in deptno 20,30 and salary>30000?
+ select * from employee where designation In ('tester','jfs developer') and deptno=100 and salary=30000;
+ select * from employee where designation In ('tester','jfs developer') and deptno in (20,30) and salary=30000;
+
+*query to display all the record of employee who not is working as tester tech support hr?
+select * from employee where designation not in('tester','tech support');
+
+*write a query to display all the record of employee whose age is 20 25 30 40 eclude all the detail of tester and developer?
+select * from employee where age in(20,25,30) and designation not in('tester','developer');
+
+*write a query to display all the detail of the employee whose eid in between 2 to 8?
+select * from employee where eid between 2 and 8;
+
+*write a query to display all the detail of employee who are hired during 2017?
+select * from employee where hiring between '2017-01-01' and '2017-12-31';
+
+*write a query to display all the record of employee excluding whose salary is range of 25000 to 30000?
+select * from employee where salary not between 25000 and 30000;
+
+
+--> IS query-it is used to check null values
+syntax: select * from table_name where column_name is null;
+select * from table_name where column_name is not null;
+
+-->LIKE - used for pattern matching
+_(underscore)-matches exactly one character
+%(percentage)-matches 0 or'n' character
+
+syntax:
+select * from table_name where column_name Like '%/_';
+select * from employee where name like 'z%';
+
+*write a query to display the employee whose name starts with A?
+ select* from employee  where ename like 'a%';
+
+*write a query to display employee whose second character is a?
+ select* from employee  where ename like '_a%';
+
+*write a query to display the name of the employee which has atleast two a in their name?
+select* from employee  where ename like '%a%a%';
+
+*write a query display the name of the employee whose name start with l and end with n?
+select* from employee  where ename like 'l%n';
+
+*write a query display all the records of the employee begins with a or l?
+select* from employee  where ename like 'a%'or ename like 'l%';
+
+*write a query to display employee name salary whose is working in deptno 10,20,30 and annual salary and job designation starts with j?
+ select ename,salary from employee where deptno=10 and designation like '%j';
+
+
+FUNCTION:-
+Function is a block of code which is use to perform a specific task.
+for doing operations and data Sql has many in-built function.
+They are--
+a.Aggregate function-for n numer of input we get only one output(multirow function)
+b.scalar function-for every one input we get one output(single row function)
+
+sum:select sum(salary) from employee;
+max: select max(salary)from employee;
+min: select min(salary)from employee;
+count: select count(salary)from employee;
+avg: select avg(salary)from employee;
+
+
+*write a query to display all the record of employee id and salary in descending oder?
+select * from employee order by eid desc;
+
+
+Day-4
+
+Types of Sub-Query
+1.Single row sub-query ==> whenever we use relational operator before inner query,then it is called SRSQ.
+
+*write a query from all the record of the employee whose date of joining is same as Lochan?
+select * from employee where doj=(select doj from employee where ename='Lochan');
+
+
+*write a query to display the second maximum salary?
+select max(salary) from employee where salary < (select max(salary) from employee);
+
+Any==> any condition if it goes true in the query then fetches the resultset
+All==> but in all,all the condition should be true to fetch the resultset
+
+2.Multi-row Sub Query ==> whnever we use in,all,any before the inner query,then it is called MRSQ.
+Syntax:select * from table_name in,all,any(select * from table_name);
+
+* write a query to display name of the employee who is working in a location which has atleast one 'A' in the location?
+select * from employee where deptno in (select deptno from department where location like '%a%');
+
+*write a query to display all the erecord of the employee who is working in admin operator developer?
+select * from employee where deptno in(select from department where deptname in ('admin','hr','developer');
+
+Group-by:- It is used to execute row by row,it is used to group the records based on some criteria.
+Syntax:
+select * from table_name from table_name group by criteria(column_name)
+It will execute from,group by,select
+
+*write the query to display the maximum salary for each department?
+select max(salary),deptno from employee group by deptno;
+
+*write a query to display the highest salary given to developer in each department?
+select max(salary),deptno from employee where designation='jfs developer' group by deptno;
+
+HAVING:-It is used to filter the records,it executes group by group
+Syntax:
+select * from table_name where condition groupby column_name having condition;
+order of execution from,where,group by,,having,select,order by
+
+*write a query to display all the record of deptno which has atleast 2 employee in it?
+select deptno from employee group by deptno having count(*) >= 2;
+
+To commit autocommit as false
+set autocommit-0;
