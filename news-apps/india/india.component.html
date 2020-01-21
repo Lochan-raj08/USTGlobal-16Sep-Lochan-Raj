@@ -1,0 +1,21 @@
+<div class="offset-6 mt-2 mb-2">
+  <div class="ui primary pointing dropdown button large btn-outline-success" suiDropdown autoClose="outsideClick">
+    <div class="text">India</div>
+    <i class="dropdown icon"></i>
+    <div class="menu" suiDropdownMenu>
+      <div class="item"><a routerLink="/india" class="text-dark">India</a></div>
+      <div class="item"><a routerLink="/usa" class="text-dark">USA</a></div>
+      <div class="item"><a routerLink="/germany" class="text-dark">Germany</a></div>
+      <div class="item"><a routerLink="/russia" class="text-dark">Russia</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <div class="card" *ngFor="let new of news">
+    <div class="card-body">
+      <a href="{{new.url}}" target="blank"><img src="{{new.urlToImage}}" alt="" class="card-img-top"></a>
+      <h1>{{new.title}}</h1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="offset-6 mt-2 mb-2">
+  <div class="ui primary pointing dropdown button large btn-outline-info" suiDropdown autoClose="outsideClick">
+    <div class="text">Wired</div>
+    <i class="dropdown icon"></i>
+    <div class="menu" suiDropdownMenu>
+      <div class="item"><a routerLink="/bbc" class="text-dark">BBC News</a></div>
+      <div class="item"><a routerLink="/toi" class="text-dark">The Times Of India</a></div>
+      <div class="item"><a routerLink="/fn" class="text-dark">Fox News</a></div>
+      <div class="item"><a routerLink="/espn" class="text-dark">ESPN</a></div>
+      <div class="item"><a routerLink="/th" class="text-dark">The Hindu</a></div>
+      <div class="item"><a routerLink="/engt" class="text-dark">Engadget</a></div>
+      <div class="item"><a routerLink="/ign" class="text-dark">IGN</a></div>
+      <div class="item"><a routerLink="/wired" class="text-dark">Wired</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <div class="card" *ngFor="let new of news">
+    <div class="card-body">
+      <a href="{{new.url}}" target="blank"><img src="{{new.urlToImage}}" alt="" class="card-img-top"></a>
+      <h1>{{new.title}}</h1>
+    </div>
+  </div>
+</div>

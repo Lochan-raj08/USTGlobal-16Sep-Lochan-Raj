@@ -1,0 +1,24 @@
+<div class="offset-6 mt-2 mb-2">
+  <div class="ui primary pointing dropdown button large btn-outline-primary" suiDropdown autoClose="outsideClick">
+    <div class="text">Business</div>
+    <i class="dropdown icon"></i>
+    <div class="menu" suiDropdownMenu>
+      <div class="item"><a routerLink="/business" class="text-dark">Business</a></div>
+      <div class="item"><a routerLink="/entertainment" class="text-dark">Entertainment</a></div>
+      <div class="item"><a routerLink="/general" class="text-dark">General</a></div>
+      <div class="item"><a routerLink="/health" class="text-dark">Health</a></div>
+      <div class="item"><a routerLink="/science" class="text-dark">Science</a></div>
+      <div class="item"><a routerLink="/sports" class="text-dark">Sports</a></div>
+      <div class="item"><a routerLink="/technology" class="text-dark">Technology</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <div class="card" *ngFor="let new of news">
+    <div class="card-body">
+      <a href="{{new.url}}" target="blank"><img src="{{new.urlToImage}}" alt="" class="card-img-top"></a>
+      <h1>{{new.title}}</h1>
+    </div>
+  </div>
+</div>

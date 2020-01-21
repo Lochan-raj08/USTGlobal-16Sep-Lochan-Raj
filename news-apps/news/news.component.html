@@ -1,0 +1,24 @@
+<div class="col-md-3 float-left">
+    <h4 class="text-center mt-2 mb-2 bg-warning">Entertainment News</h4>
+    <div class="grad shadow"></div>
+    <div class="col-md-12 card card-body shadow" *ngFor="let new of entertainmentNews">
+        <a href="{{new.url}}"><img src="{{new.urlToImage}}" alt="Entertainment news image" class="card-img-top"></a>
+        <h2>{{new.title}}</h2>
+    </div>
+</div>
+<div class="col-md-6 float-left">
+    <h3 class="text-center mt-2 mb-2 bg-success">Top Headlines From India</h3>
+    <div class="grad shadow"></div>
+    <div class="col-md-12 card card-body shadow-lg" *ngFor="let new of topNews">
+        <a href="{{new.url}}"><img src="{{new.urlToImage}}" alt="Top news image" class="card-img-top"></a>
+        <h2>{{new.title}}</h2>
+    </div>
+</div>
+<div class="col-md-3 float-right">
+    <h4 class="text-center mt-2 mb-2 bg-info">Sports News</h4>
+    <div class="grad shadow"></div>
+    <div class="col-md-12 card card-body shadow" *ngFor="let new of sportsNews">
+        <a href="{{new.url}}"><img src="{{new.urlToImage}}" alt="Sports news image" class="card-img-top"></a>
+        <h2>{{new.title}}</h2>
+    </div>
+</div>
